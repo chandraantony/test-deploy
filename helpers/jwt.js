@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-const token_exp = { expiresIn: 1 * 60 }; // change to 2 min
+const token_exp = { expiresIn: 60 * 1800 }; // change to 2 min
 const refreh_exp = { expiresIn: 60 * 1800 }; // refresh expired in 1 montth
 
 exports.createToken = (payload) => {
