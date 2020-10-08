@@ -6,8 +6,7 @@ const ship = model.mst_ship;
 const { sequelize, Sequelize } = require('../models');
 exports.getShip = async (req,res,next) =>{
     try {
-        const data = await shipRepo.findShip()   
-        console.log(data)   
+        const data = await shipRepo.findShip()     
         res.json(data) 
     } catch (error) {
         next(error);

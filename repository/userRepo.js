@@ -33,3 +33,16 @@ exports.findUserName = (data) => {
     .then((data)=> data)
     .catch((err) => err);
 }
+
+exports.checkUnamePassword = (userName,password) => {
+    const promise = user.findOne({
+        where : {
+            user_name : userName,
+            password : password
+        }
+    })
+
+    return promise
+    .then((data)=> data)
+    .catch((err) => err);
+}
