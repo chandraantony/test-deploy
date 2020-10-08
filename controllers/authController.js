@@ -1,8 +1,16 @@
+const auth = require('../helpers/jwt');
+
 exports.login = (req,res,next) => {
-    res.json({
-        msg : 'asdasdasd'
-    })
-};
+    try {
+        const data = req.body;
+        console.log(req.body.user_name)
+        console.log(req.body.password)
+        const token = auth.createToken(data);
+        res.json(token);
+      } catch (error) {
+        next(error);
+      }    
+}
 
 exports.registrer = (req,res,next) => {
     res.json({
