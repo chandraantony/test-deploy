@@ -1,5 +1,6 @@
 const helpers = require('../helpers/functions')
 const auth = require('../helpers/jwt');
+const userRepo = require('../repository/userRepo')
 
 exports.login = (req,res,next) => {
     try {
@@ -13,8 +14,24 @@ exports.login = (req,res,next) => {
       }    
 }
 
-exports.registrer = (req,res,next) => {
-    res.json({
-        msg : 'register'
-    })
+exports.register = async (req,res,next) => {
+    try {
+       const findData  = await userRepo.findUserName(req.body.user_name)
+       if(findData){
+          res.json({
+              success : false,
+              message : 'Username Sudah Dipakai'
+          })
+          res.status(400)
+       }else{
+          create = await userRepo.createUser(req.body)
+          res.json({
+              success : true,
+              message : 'succeed'
+          })
+       }
+       res.status(200)
+    } catch (error) {
+      next(error)
+    }
 }

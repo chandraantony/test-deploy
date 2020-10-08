@@ -6,14 +6,7 @@ module.exports = {
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     dialect: process.env.DB_DIALECT,
-    dialectOptions: {
-      ssl: {
-        require: true,
-        rejectUnauthorized: false,
-      },
-      keepAlive: true,
-      useUTC: false
-    },
+    dialectOptions: {},
     timezone: '00:00',
     operatorsAliases: 0
   },
