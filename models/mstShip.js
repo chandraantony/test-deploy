@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = (sequelize, DataTypes) => {
-  const mstShip = sequelize.define('mst_ship', {
+  const mst_ship = sequelize.define('mst_ship', {
     id: {
         type: 'INTEGER',
         allowNull: false,
@@ -64,8 +64,8 @@ module.exports = (sequelize, DataTypes) => {
         freezeTableName: true,
         timestamps: false
     });
-  mstShip.associate = function (models) {
+  mst_ship.associate = function (models) {
 
   };
-  return mstShip;
+  return mst_ship;
 };
