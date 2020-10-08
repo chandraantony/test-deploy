@@ -6,7 +6,15 @@ module.exports = {
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     dialect: process.env.DB_DIALECT,
-    dialectOptions: {},
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      },
+      keepAlive: true,
+      useUTC: false
+    },
+    timezone: '00:00',
     operatorsAliases: 0
   },
   test: {
@@ -16,7 +24,15 @@ module.exports = {
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     dialect: process.env.DB_DIALECT,
-    dialectOptions: {},
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      },
+      keepAlive: true,
+      useUTC: false
+    },
+    timezone: '00:00',
     operatorsAliases: 0
   },
   production: {
@@ -26,7 +42,16 @@ module.exports = {
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     dialect: process.env.DB_DIALECT,
-    dialectOptions: {},
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      },
+      keepAlive: true,
+      useUTC: false
+    },
+    timezone: '00:00',
     operatorsAliases: 0
   }
-}
+
+};
