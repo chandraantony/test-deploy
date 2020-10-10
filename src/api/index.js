@@ -2,6 +2,7 @@ const express = require('express');
 
 const auth = require('./auth');
 const shipping = require('./shipping')
+const peb = require('./peb')
 const upload = require('./upload')
 const router = express.Router();
 
@@ -14,5 +15,6 @@ router.get('/', (req, res) => {
 router.use('/auth', auth);
 router.use('/shipping', shipping);
 router.use('/upload', upload)
+router.use('/peb', peb)
 
 module.exports = router;

@@ -1,8 +1,10 @@
 var multer = require('multer')
 
 exports.upload = (req,res,next) => {
-    console.log(req.file.originalname )
+    console.log(req.file )
     res.json({
-        msg : 'upload file'
+        sucess : true,
+        message : 'Upload Success',
+        url : "/test/url",
     })
 }

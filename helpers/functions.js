@@ -10,7 +10,7 @@ function compare(val,hash) {
     return bcrypt.compareSync(val, hash)
 }
 
-const file = multer({})
+const file = multer({}).single('upload')
 
 module.exports = {
     salt,
