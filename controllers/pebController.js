@@ -3,8 +3,9 @@ const { param } = require('../src/api')
 
 
 exports.addPEB = async (req,res,next) => {
+    const session = req.session
     try {
-        const data = await pebRepo.createPeb(req.body)
+        const data = await pebRepo.createPeb(req.body,session)
         res.json({
             success : true,
             message : "Input Berhasil"
@@ -39,10 +40,11 @@ exports.deletePeb = async (req,res,next) => {
 
 exports.updatePeb = async (req,res,next) => {
     const params = req.params.id
+    const session = req.session
     try {
         const data = await pebRepo.findById(params);
         if(data){
-            const updateData = await pebRepo.updatePeb(params,req.body);
+            const updateData = await pebRepo.updatePeb(params,req.body,session);
             console.log(updateData)
             if(updateData){
                 res.json({

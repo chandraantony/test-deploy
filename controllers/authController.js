@@ -6,8 +6,10 @@ exports.login = async (req,res,next) => {
     const data = req.body;
     try {        
         const findData  = await userRepo.findUserName(data.user_name)
+        var stringfy = JSON.stringify(findData)
+        var formatData = JSON.parse(stringfy)
         if(findData){
-          const token = auth.createToken(data);
+          const token = auth.createToken(formatData);
           //const checkPassword = await userRepo.checkUnamePassword(data.user_name, data.password)
           if(helpers.compare(data.password,findData.password)){
             res.json({token : token.token, refresh_token : token.refresh_token , data : findData})

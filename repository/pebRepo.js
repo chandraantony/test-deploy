@@ -23,7 +23,7 @@ exports.findById = (id) => {
     .catch((err) => err)
 }
 
-exports.updatePeb = (id,data) => {
+exports.updatePeb = (id,data,session) => {
     const promise = peb.update({
         no_peb : data.no_peb,
         date_peb :	data.date_peb,	
@@ -36,7 +36,7 @@ exports.updatePeb = (id,data) => {
         file_lc	 :  data.file_lc,	
         file_roa_surveyor :	data.file_roa_surveyor,	
         file_shipping_instruction :	data.file_roa_surveyor,	
-        updated_by : 1,		
+        updated_by : session.id,		
         updated_at : new Date()
     },
     {
@@ -60,7 +60,7 @@ exports.deletePeb = (id) => {
     .catch((err) => err)
 }
 
-exports.createPeb = (data) => {
+exports.createPeb = (data,session) => {
     const promise = peb.create({
         no_peb : data.no_peb,
         date_peb :	data.date_peb,	
@@ -73,8 +73,7 @@ exports.createPeb = (data) => {
         file_lc	 :  data.file_lc,	
         file_roa_surveyor :	data.file_roa_surveyor,	
         file_shipping_instruction :	data.file_roa_surveyor,	
-        created_by : 1,	
-        updated_by : 1,	
+        created_by : session.id,	
         created_at : new Date(),	
         updated_at : new Date()
     })
