@@ -1,6 +1,4 @@
 const pebRepo = require('../repository/pebRepo')
-const { param } = require('../src/api')
-
 
 exports.addPEB = async (req,res,next) => {
     const session = req.session

@@ -81,3 +81,11 @@ exports.createPeb = (data,session) => {
     .then((data)=> data)
     .catch((err) => err);
 };
+
+exports.rawQuery = async () => {
+    const query = await sequelize.query('SELECT * FROM "mst_peb" limit 5', {
+      model: order,
+      mapToModel: true
+    });
+    return query;
+  };
