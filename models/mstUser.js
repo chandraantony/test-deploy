@@ -34,6 +34,14 @@ module.exports = (sequelize, DataTypes) => {
         special: [],
         primaryKey: false
       },
+      is_admin: {
+        type: 'SMALLINT',
+        allowNull: true,
+        defaultValue: '0',
+        comment: null,
+        special: [],
+        primaryKey: false
+      },
       created_by: {
         type: 'INTEGER',
         allowNull: true,

@@ -12,7 +12,7 @@ var auto = new SequelizeAuto(process.env.DB_DATABASE , process.env.DB_USERNAME, 
         timestamps: false
         //...
     },
-    tables : ['mst_peb']
+    tables : ['mst_user']
 })
 
 auto.run(function (err) {

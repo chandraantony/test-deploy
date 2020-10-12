@@ -10,11 +10,13 @@ exports.createUser = (data) => {
     const fullName = data.full_name
     const userName = data.user_name
     const password = helpers.salt(data.password)
+    const isAdmin = data.is_admin
     const promise = user.create({
         email : email,
         full_name : fullName,
         user_name : userName,
         password : password,
+        is_admin :isAdmin,
         created_at : new Date(),
         updated_at : new Date()
     })
