@@ -3,7 +3,6 @@ const saltRounds = 10;
 const multer = require('multer')
 const cloudinary = require('cloudinary').v2;
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
-const { get } = require('../src/api/auth');
 
 function salt(val) {
     return bcrypt.hashSync(val, saltRounds)
@@ -34,8 +33,12 @@ const storage = new CloudinaryStorage({
 
 const file = multer({storage : storage}).single('upload')
 
+const filedll = multer({}).single('upload')
+
 module.exports = {
     salt,
+    fileName,
     file,
-    compare
+    compare,
+    filedll
 }

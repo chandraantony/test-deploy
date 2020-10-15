@@ -66,7 +66,7 @@ exports.createPeb = (data,session) => {
         date_peb :	data.date_peb,	
         date_re :	data.date_re,	
         name_export :	data.name_export,	
-        iup_op : date.iup_op,	
+        iup_op : data.iup_op,	
         shipping_name :	data.shipping_name,	
         total_load :	data.total_load,	
         file_form_3d :	data.file_form_3d,	
