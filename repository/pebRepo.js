@@ -29,13 +29,13 @@ exports.updatePeb = (id,data,session) => {
         date_peb :	data.date_peb,	
         date_re :	data.date_re,	
         name_export :	data.name_export,	
-        iup_op : date.iup_op,	
+        iup_op : data.iup_op,	
         shipping_name :	data.shipping_name,	
         total_load :	data.total_load,	
         file_form_3d :	data.file_form_3d,	
         file_lc	 :  data.file_lc,	
         file_roa_surveyor :	data.file_roa_surveyor,	
-        file_shipping_instruction :	data.file_roa_surveyor,	
+        file_shipping_instruction :	data.file_shipping_instruction,	
         updated_by : session.id,		
         updated_at : new Date()
     },
@@ -72,10 +72,9 @@ exports.createPeb = (data,session) => {
         file_form_3d :	data.file_form_3d,	
         file_lc	 :  data.file_lc,	
         file_roa_surveyor :	data.file_roa_surveyor,	
-        file_shipping_instruction :	data.file_roa_surveyor,	
+        file_shipping_instruction :	data.file_shipping_instruction,	
         created_by : session.id,	
         created_at : new Date(),	
-        updated_at : new Date()
     })
     return promise
     .then((data)=> data)
