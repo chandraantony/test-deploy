@@ -1,35 +1,14 @@
-const pebRepo = require('../repository/pebRepo')
+const rulesRepo = require('../repository/rulesRepo')
 const helpers = require('../helpers/functions')
 
-exports.addPEB = async (req,res,next) => {
+exports.addData = async (req,res,next) => {
     const session = req.session
     try {
-        const data = await pebRepo.createPeb(req.body,session)
-        res.json({
-            success : true,
-            message : "Input Berhasil"
-        })
-    } catch (error) {
-        next(error)
-    }
-}
-
-exports.deletePeb = async (req,res,next) => {
-    const params = req.params.id
-    try {
-        const data = await pebRepo.findById(params);
+        const data = await rulesRepo.createData(req.body,session)
         if(data){
-            const deleteData = await pebRepo.deletePeb(params);
-            if(deleteData){
-                res.json({
-                    success : true,
-                    message : 'Data Deleted Succefully'
-                })
-            }
-        }else{
             res.json({
-                success : false,
-                message : 'Data not found',         
+                success : true,
+                message : "Input Berhasil"
             })
         }
     } catch (error) {
@@ -37,14 +16,44 @@ exports.deletePeb = async (req,res,next) => {
     }
 }
 
-exports.updatePeb = async (req,res,next) => {
+exports.deleteData = async (req,res,next) => {
     const params = req.params.id
+    try {
+        if(params){
+            const data = await rulesRepo.deleteData(params);
+            if(data){
+                res.json({
+                    success : true,
+                    data : "Delete Succesfully"          
+                })
+            }else{
+                res.json({
+                    success : true,
+                    message : 'Data not found',
+                    data : {}            
+                })
+            }            
+        }else{       
+            const data = await rulesRepo.findAllData()     
+            res.json({
+                success : true,
+                data : data            
+            })
+        }
+    } catch (error) {
+        next(error)
+    }
+}
+
+exports.updateData = async (req,res,next) => {
+    const params = req.params.id
+    console.log(params)
     const session = req.session
     try {
-        const data = await pebRepo.findById(params);
+        const data = await rulesRepo.findById(params);
+        console.log(data)
         if(data){
-            const updateData = await pebRepo.updatePeb(params,req.body,session);
-            console.log(updateData)
+            const updateData = await rulesRepo.updateData(params,req.body,session);
             if(updateData){
                 res.json({
                     success : true,
@@ -62,11 +71,11 @@ exports.updatePeb = async (req,res,next) => {
     }
 }
 
-exports.dataPeb = async (req,res,next) => {
+exports.getData = async (req,res,next) => {
     const params = req.params.id
     try {
         if(params){
-            const data = await pebRepo.findById(params);
+            const data = await rulesRepo.findById(params);
             if(data){
                 res.json({
                     success : true,
@@ -79,14 +88,14 @@ exports.dataPeb = async (req,res,next) => {
                     data : {}            
                 })
             }            
-        }else{  
+        }else{       
             if(req.query.search != null ||  req.query.search || undefined){
                 res.json({
                     msg : 'asdad'
                 })
             }else{
                 const setting = helpers.paginate(req.query)
-                var data = await pebRepo.findAllData(setting)
+                var data = await rulesRepo.findAllData(setting)
                 var info = {
                     page_size : parseInt(setting.pageSize),
                     page_no : parseInt(setting.pageNo),

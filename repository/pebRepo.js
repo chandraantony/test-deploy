@@ -1,12 +1,17 @@
-const { date } = require('joi');
-const moment = require('moment');
 const model = require('../models');
-
 const peb = model.mst_peb;
 const { sequelize, Sequelize } = require('../models');
 
-exports.findAllData = () => {
-    const promise = peb.findAll({})
+exports.findAllData = (setting) => {
+    console.log(setting)
+    const promise = peb.findAndCountAll({
+        distinct:true,
+        order:[
+            ["id","DESC"]
+        ],
+        offset:((setting.pageNo-1)*setting.pageSize),
+        limit : setting.pageSize,
+    })
     return promise
     .then((data)=> data)
     .catch((err) => err);
