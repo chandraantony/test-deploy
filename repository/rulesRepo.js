@@ -17,6 +17,18 @@ exports.findAllData = (setting) => {
     .catch((err) => err);
 };
 
+exports.getAllData = () => {
+    const promise = rules.findAndCountAll({
+        distinct:true,
+        order:[
+            ["id","DESC"]
+        ],
+    })
+    return promise
+    .then((data)=> data)
+    .catch((err) => err);
+}
+
 exports.findById = (id) => {
     const promise = rules.findOne({
         where : {

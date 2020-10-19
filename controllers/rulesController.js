@@ -95,11 +95,15 @@ exports.getData = async (req,res,next) => {
                 })
             }else{
                 const setting = helpers.paginate(req.query)
-                var data = await rulesRepo.findAllData(setting)
+                if(setting.pageNo > 0) {
+                    var data = await rulesRepo.findAllData(setting)
+                }else{
+                    var data = await rulesRepo.getAllData()
+                }
                 var info = {
-                    page_size : parseInt(setting.pageSize),
+                    page_size : setting.pageNo > 0 ? parseInt(setting.pageSize) : data.count,
                     page_no : parseInt(setting.pageNo),
-                    total_page : Math.ceil(data.count / setting.pageSize)
+                    total_page : setting.pageNo > 0? Math.ceil(data.count / setting.pageSize) :1
                 }
                 data = {...data,...info}
                 res.json({

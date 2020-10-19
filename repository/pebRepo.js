@@ -3,7 +3,6 @@ const peb = model.mst_peb;
 const { sequelize, Sequelize } = require('../models');
 
 exports.findAllData = (setting) => {
-    console.log(setting)
     const promise = peb.findAndCountAll({
         distinct:true,
         order:[
@@ -11,6 +10,18 @@ exports.findAllData = (setting) => {
         ],
         offset:((setting.pageNo-1)*setting.pageSize),
         limit : setting.pageSize,
+    })
+    return promise
+    .then((data)=> data)
+    .catch((err) => err);
+};
+
+exports.getAllData = () => {
+    const promise = peb.findAndCountAll({
+        distinct:true,
+        order:[
+            ["id","DESC"]
+        ],
     })
     return promise
     .then((data)=> data)
