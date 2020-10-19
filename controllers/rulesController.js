@@ -89,29 +89,23 @@ exports.getData = async (req,res,next) => {
                 })
             }            
         }else{       
-            if(req.query.search != null ||  req.query.search || undefined){
-                res.json({
-                    msg : 'asdad'
-                })
+            const setting = helpers.paginate(req.query)
+            if(setting.pageNo > 0) {
+                var data = await rulesRepo.findAllData(setting)
             }else{
-                const setting = helpers.paginate(req.query)
-                if(setting.pageNo > 0) {
-                    var data = await rulesRepo.findAllData(setting)
-                }else{
-                    var data = await rulesRepo.getAllData()
-                }
-                var info = {
-                    page_size : setting.pageNo > 0 ? parseInt(setting.pageSize) : data.count,
-                    page_no : parseInt(setting.pageNo),
-                    total_page : setting.pageNo > 0? Math.ceil(data.count / setting.pageSize) :1
-                }
-                data = {...data,...info}
-                res.json({
-                    success : true,
-                    data : data            
-                })
-            } 
-        }
+                var data = await rulesRepo.getAllData(setting)
+            }
+            var info = {
+                page_size : parseInt(setting.pageSize),
+                page_no : parseInt(setting.pageNo),
+                total_page : Math.ceil(data.count / setting.pageSize)
+            }
+            data = {...data,...info}
+            res.json({
+                success : true,
+                data : data            
+            })
+        } 
     } catch (error) {
         next(error)
     }

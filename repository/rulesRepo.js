@@ -1,13 +1,24 @@
 const model = require('../models');
-const testModel = require('../models/mstPeb')
 const rules = model.mst_rules;
 const { sequelize, Sequelize } = require('../models');
+const Op = Sequelize.Op
 
 exports.findAllData = (setting) => {
     const promise = rules.findAndCountAll({
         distinct:true,
+        where : 
+        Sequelize.or(
+            [Sequelize.where(
+                Sequelize.fn('lower', Sequelize.col('name'),),
+                {[Op.substring] : setting.search.toLowerCase() }
+            )],
+            [Sequelize.where(
+                Sequelize.fn('lower', Sequelize.col('descriptions'),),
+                {[Op.substring] : setting.search.toLowerCase() }
+            )],
+        ),                     
         order:[
-            ["id","DESC"]
+            ["id","ASC"]
         ],
         offset:((setting.pageNo-1)*setting.pageSize),
         limit : setting.pageSize,
