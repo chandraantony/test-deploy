@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs');
 const saltRounds = 10;
 const multer = require('multer')
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
+const { search } = require('../src/api/rules');
 const cloudinary = require('cloudinary').v2;
 cloudinary.config({ 
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME, 
@@ -26,7 +27,8 @@ const file = multer({storage : storage}).single('upload')
 function paginate (params) {
     return {
         pageNo :  params.pageNo ? params.pageNo : 1,
-        pageSize : params.pageSize ? params.pageSize : 5
+        pageSize : params.pageSize ? params.pageSize : 5,
+        search : params.search ? params.search : ''
     }
 }
 

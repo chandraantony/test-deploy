@@ -1,12 +1,41 @@
 const model = require('../models');
+const moment  = require('moment')
 const peb = model.mst_peb;
 const { sequelize, Sequelize } = require('../models');
+const Op = Sequelize.Op
 
 exports.findAllData = (setting) => {
     const promise = peb.findAndCountAll({
         distinct:true,
+        where : 
+        Sequelize.or(
+            [Sequelize.where(
+                Sequelize.fn('lower', Sequelize.col('no_peb'),),
+                {[Op.substring] : setting.search.toLowerCase() }
+            )],
+            [Sequelize.where(
+                Sequelize.fn('lower', Sequelize.col('name_export'),),
+                {[Op.substring] : setting.search.toLowerCase() }
+            )],
+            [Sequelize.where(
+                Sequelize.fn('lower', Sequelize.col('shipping_name'),),
+                {[Op.substring] : setting.search.toLowerCase() }
+            )],
+            [Sequelize.where(
+                Sequelize.fn('lower', Sequelize.col('iup_op'),),
+                {[Op.substring] : setting.search.toLowerCase() }
+            )],
+            {date_re :{
+                [Op.gte] :isNaN(Date.parse(setting.search)) ? null : moment(setting.search).format()
+                }
+            },
+            {date_peb :{
+                [Op.gte] :isNaN(Date.parse(setting.search)) ? null : moment(setting.search).format()
+                }
+            }  
+        ),                     
         order:[
-            ["id","DESC"]
+            ["id","ASC"]
         ],
         offset:((setting.pageNo-1)*setting.pageSize),
         limit : setting.pageSize,

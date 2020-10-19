@@ -80,11 +80,11 @@ exports.dataPeb = async (req,res,next) => {
                 })
             }            
         }else{  
-            if(req.query.search != null){
-                res.json({
-                    msg : 'asdad'
-                })
-            }else{
+            // if(req.query.search != null){
+            //     res.json({
+            //         msg : 'asdad'
+            //     })
+            // }else{
                 const setting = helpers.paginate(req.query)
                 if(setting.pageNo > 0){
                     var data = await pebRepo.findAllData(setting)
@@ -101,7 +101,7 @@ exports.dataPeb = async (req,res,next) => {
                     success : true,
                     data : data            
                 })
-            } 
+            // } 
         }
     } catch (error) {
         next(error)
