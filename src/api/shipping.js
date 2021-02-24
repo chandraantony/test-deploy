@@ -7,5 +7,6 @@ router.get('/', (req, res) => {
   res.json('api/v1/shipping');
 });
 router.get('/boat', shipController.getShip);
+router.get('/testResponse', shipController.makeResponse)
 
 module.exports = router;

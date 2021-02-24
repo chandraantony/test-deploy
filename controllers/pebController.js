@@ -44,7 +44,6 @@ exports.updatePeb = async (req,res,next) => {
         const data = await pebRepo.findById(params);
         if(data){
             const updateData = await pebRepo.updatePeb(params,req.body,session);
-            console.log(updateData)
             if(updateData){
                 res.json({
                     success : true,

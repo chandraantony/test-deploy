@@ -47,11 +47,9 @@ exports.deleteData = async (req,res,next) => {
 
 exports.updateData = async (req,res,next) => {
     const params = req.params.id
-    console.log(params)
     const session = req.session
     try {
         const data = await rulesRepo.findById(params);
-        console.log(data)
         if(data){
             const updateData = await rulesRepo.updateData(params,req.body,session);
             if(updateData){
