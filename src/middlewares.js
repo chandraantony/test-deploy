@@ -16,7 +16,12 @@ function errorHandler(err, req, res, next) {
   });
 }
 
+function haltOnTimedout (req, res, next) {
+  if (!req.timedout) next()
+}
+
 module.exports = {
   notFound,
-  errorHandler
+  errorHandler,
+  haltOnTimedout
 };
